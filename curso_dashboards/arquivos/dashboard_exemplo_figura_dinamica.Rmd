@@ -1,0 +1,76 @@
+---
+title: "Painel de Dengue"
+output: 
+  flexdashboard::flex_dashboard:
+    orientation: rows
+    vertical_layout: fill
+---
+
+```{r setup, include=FALSE}
+# Carregando os pacotes necessários
+require(flexdashboard)
+require(foreign)
+require(tidyverse)
+require(lubridate)
+require(plotly)
+
+# Importando o banco de dados com a função `read.dbf()`
+nindi <- read.dbf(file = '../Dados/NINDINET.dbf')
+
+# Armazenando apenas dados para dengue
+dengue <- nindi |>
+  filter(ID_AGRAVO == 'A90') |>
+  mutate(
+    DT_SIN_PRI = ymd(DT_SIN_PRI),
+    sem_epi = epiweek(DT_SIN_PRI),
+    ano_epi = epiyear(DT_SIN_PRI),
+    mes = month(DT_SIN_PRI),
+    NU_ANO = as.numeric(NU_ANO)
+  )
+```
+
+Row {data-width=650}
+-----------------------------------------------------------------------
+
+### Casos de dengue por semana epidemiológica
+
+```{r}
+# Criando o objeto de gráfico
+grafico_1 <- dengue |>
+  
+  # Contando número de casos por ano e semana epidemiológica
+  count(ano_epi, sem_epi) |>
+  
+  # Plotando visualização de gráfico por ano e semana epidemiológica
+  ggplot(aes(
+    x = sem_epi,
+    y = n,
+    color = factor(ano_epi)
+  )) +
+  
+  # Adicionando linhas
+  geom_line() +
+  
+  # Adicionando pontos
+  geom_point() +
+  
+  # Aplicando novo tema para o gráfico
+  theme_minimal() +
+  
+  # Adicionando rótulo para o eixo x
+  xlab("\nSemana epidemiológica") +
+  
+  # Adicionando rótulo para o eixo y
+  ylab("") +
+  
+  # Definindo o título da legenda
+  scale_color_discrete("Ano") +
+  
+  # Definindo o intervalo de valores dos rótulos do eixo x
+  scale_x_continuous(breaks = c(1, seq(5, 50, 5)))
+
+# Plotando um gráfico dinâmico
+ggplotly(grafico_1)
+```
+
+

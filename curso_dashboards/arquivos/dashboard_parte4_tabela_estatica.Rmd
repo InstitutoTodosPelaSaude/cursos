@@ -1,0 +1,184 @@
+---
+title: "Painel de Dengue"
+output: 
+  flexdashboard::flex_dashboard:
+    orientation: rows
+    vertical_layout: fill
+---
+
+```{r setup, include=FALSE}
+# Carregando os pacotes necessários
+require(flexdashboard)
+require(foreign)
+require(tidyverse)
+require(lubridate)
+require(plotly)
+require(knitr)
+
+# Importando o banco de dados com a função `read.dbf()` do pacote `foreign`
+nindi <- read.dbf(file = '../Dados/NINDINET.dbf')
+
+# Armazenando apenas dados para dengue
+dengue <- nindi |>
+  filter(ID_AGRAVO == 'A90') |>
+  mutate(
+    DT_SIN_PRI = ymd(DT_SIN_PRI),
+    sem_epi = epiweek(DT_SIN_PRI),
+    ano_epi = epiyear(DT_SIN_PRI),
+    mes = month(DT_SIN_PRI),
+    NU_ANO = as.numeric(NU_ANO)
+  )
+
+```
+
+
+Row
+-----------------------------------------------------------------------
+
+###
+
+```{r}
+# BLOCO 1
+# Criando objeto numérico com o total de casos de dengue
+total_casos <- dengue |>
+  
+  # Filtrando pelo ano epidemiológico de 2012 com a função filter()
+  filter(ano_epi == 2012) |>
+  
+  # Contando o número de linhas (registros) com a função nrow()
+  nrow()
+
+# Inserindo a caixa de valores
+valueBox(total_casos,
+         caption = "Casos notificados",
+         color = "primary",
+         icon = "fa-exclamation-circle")
+```
+
+###
+
+```{r}
+# BLOCO 2
+# Criando objeto numérico com o total de casos de dengue com classificação final de "cura"
+total_cura <- dengue |>
+  
+  # Filtrando pelo ano epidemiológico de 2012 com a função filter()
+  filter(ano_epi == 2012) |>
+  
+  # Filtrando pela classificação final pelo código de cura (1) com a função filter()
+  filter(CLASSI_FIN == 1) |>
+  
+  # Contando o número de linhas (registros) com a função nrow()
+  nrow()
+
+# Inserindo a caixa de valores
+valueBox(total_cura ,
+         caption = "Cura",
+         color = "success",
+         icon = "fa-plus-square")
+```
+
+###
+
+```{r}
+# BLOCO 3
+# Criando objeto numérico com o total de casos de dengue com classificação final de "óbito"
+total_obitos <- dengue |>
+  
+  # Filtrando pelo ano epidemiológico de 2012 com a função filter()
+  filter(ano_epi == 2012) |>
+  
+  # Filtrando pela classificação final pelo código de óbito (2) com a função filter()
+  filter(CLASSI_FIN == 2) |>
+  
+  # Contando o número de linhas (registros) com a função nrow()
+  nrow()
+
+# Inserindo a caixa de valores
+valueBox(total_obitos,
+         caption = "Óbitos",
+         color = "warning",
+         icon = "fa-heartbeat")
+```
+
+Row
+-----------------------------------------------------------------------
+
+### Casos de dengue por semana epidemiológica
+
+```{r}
+# Criando o objeto de gráfico
+grafico_1 <- dengue |>
+  
+  # Contando número de casos por ano e semana epidemiológica
+  count(ano_epi, sem_epi) |>
+  
+  # Plotando visualização de gráfico por ano e semana epidemiológica
+  ggplot(aes(
+    x = sem_epi,
+    y = n,
+    color = factor(ano_epi)
+  )) +
+  
+  # Adicionando linhas
+  geom_line() +
+  
+  # Adicionando pontos
+  geom_point() +
+  
+  # Aplicando novo tema para o gráfico
+  theme_minimal() +
+  
+  # Adicionando rótulo para o eixo x
+  xlab("\nSemana epidemiológica") +
+  
+  # Adicionando rótulo para o eixo y
+  ylab("") +
+  
+  # Definindo o título da legenda
+  scale_color_discrete("Ano") +
+  
+  # Definindo o intervalo de valores dos rótulos do eixo x
+  scale_x_continuous(breaks = c(1, seq(5, 50, 5)))
+
+# Plotando um gráfico dinâmico
+ggplotly(grafico_1)
+```
+
+Row
+------------------------------------------------------------------------
+### Classificação final dos casos de dengue por ano epidemiológico
+
+```{r}
+# Criando nova tabela com informações sobre dengue
+tabela_dengue <- dengue |>
+  
+  # Criando nova coluna com os nomes da Classificação Final utilizando a função mutate()
+  mutate(
+    Classificacao = case_when(
+      CLASSI_FIN == 1 ~ "Cura",
+      CLASSI_FIN == 2 ~ "Óbito",
+      CLASSI_FIN >= 3 ~ "Outro",
+      is.na(CLASSI_FIN) ~ "Ignorado"
+    )
+  ) |>
+  
+  # Contando o número de casos por ano epidemiológico e classificação final com a função count()
+  count(ano_epi, Classificacao) |>
+  
+  # Pivoteando a tabela para o formato "largo"
+  pivot_wider(names_from = Classificacao,
+              values_from = n,
+              values_fill = 0) |>
+  
+  # Selecionando apenas as colunas de interesse
+  select(ano_epi, Cura, Óbito, Outro, `Ignorado`) |>
+  
+  # Renomeando a coluna de ano epidemiológico ("ano_epi") para "Ano"
+  rename(Ano = ano_epi)
+
+# Gerando uma tabela com a função kable()
+kable(tabela_dengue)
+```
+
+

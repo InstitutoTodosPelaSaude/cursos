@@ -1,0 +1,31 @@
+---
+title: "Painel de Dengue"
+output: 
+  flexdashboard::flex_dashboard:
+    orientation: rows
+    vertical_layout: fill
+---
+
+```{r setup, include=FALSE}
+# Carregando os pacotes necessários
+require(flexdashboard)
+require(foreign)
+require(tidyverse)
+require(lubridate)
+
+# Importando o banco de dados com a função `read.dbf()` do pacote `foreign`
+nindi <- read.dbf(file = '../Dados/NINDINET.dbf')
+
+# Armazenando apenas dados para dengue
+dengue <- nindi |>
+  filter(ID_AGRAVO == 'A90') |>
+  mutate(
+    DT_SIN_PRI = ymd(DT_SIN_PRI),
+    sem_epi = epiweek(DT_SIN_PRI),
+    ano_epi = epiyear(DT_SIN_PRI),
+    mes = month(DT_SIN_PRI),
+    NU_ANO = as.numeric(NU_ANO)
+  )
+
+```
+
