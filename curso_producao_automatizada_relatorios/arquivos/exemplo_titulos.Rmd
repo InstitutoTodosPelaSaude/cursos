@@ -1,0 +1,42 @@
+---
+title: "Relatório Informativo sobre Dengue"
+author: "Vigilância Epidemiológica do Estado de Rosas"
+date: '2022-07-11'
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Título de nível 1
+
+## Título de nível 2
+
+### Título de nível 3
+
+#### Título de nível 4
+
+# Lista ordenada
+
+1. Primeiro item
+
+2. Segundo item
+
+  i. Subitem 1
+  
+  ii. Subitem 2
+  
+  iii. Subitem 3
+  
+# Lista não-ordenada
+
+* Primeiro item
+
+* Segundo item
+
+  + Subitem 1
+  
+  + Subitem 2
+  
+  + Subitem 3

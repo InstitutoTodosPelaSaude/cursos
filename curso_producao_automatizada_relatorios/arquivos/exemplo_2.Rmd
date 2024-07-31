@@ -1,0 +1,13 @@
+---
+title: "Relatório Informativo sobre Dengue"
+author: "Vigilância Epidemiológica do Estado de Rosas"
+date: '2022-07-11'
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+O **Departamento de Vigilância Epidemiológica do Estado de Rosas**, por meio deste boletim informativo^1^, apresenta informações gerais sobre a dengue^2^, assim como uma breve análise dos dados históricos relativos à situação epidemiológica da dengue no Estado de Rosas. Entre 2007 e 2012, o município registrou _N_ casos confirmados de dengue e _M_ óbitos. A distribuição dos casos confirmados por semana epidemiológica é apresentada na *Figura 1*. O número de casos por classificação final são apresentados na *Tabela 1*.
+

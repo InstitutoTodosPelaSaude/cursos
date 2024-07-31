@@ -1,0 +1,158 @@
+---
+title: "Relatório Informativo sobre Dengue"
+author: "Vigilância Epidemiológica do Estado de Rosas"
+date: '2022-07-11'
+output:
+  html_document: default
+  pdf_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+# Carregando os pacotes necessários
+require(foreign)
+require(tidyverse)
+require(lubridate)
+require(kableExtra)
+
+# Importando o banco de dados com a função `read.dbf()`
+nindi <- read.dbf(file = 'Dados/NINDINET.dbf')
+
+# Armazenando apenas dados para dengue
+dengue <- nindi |>
+  # Filtrando apenas casos de dengue com a função filter()
+  filter(ID_AGRAVO == 'A90') |> 
+  # Criando novas colunas com a função mutate()
+         # Convertendo a coluna DT_SIN_PRI (data de primeiros sintomas) para o formato de date (Date)
+  mutate(DT_SIN_PRI = ymd(DT_SIN_PRI),
+         # Criando nova coluna com a semana epidemiológica com o uso da função epiweek()
+         sem_epi = epiweek(DT_SIN_PRI),
+         # Criando nova coluna com o ano epidemiológico com o uso da função epiyear()
+         ano_epi = epiyear(DT_SIN_PRI),
+         # Criando nova coluna com o mês de primeiros sintomas
+         mes = month(DT_SIN_PRI))
+```
+
+O **Departamento de Vigilância Epidemiológica do Estado de Rosas**, por meio deste boletim informativo^1^, apresenta informações gerais sobre a dengue^2^, assim como uma breve análise dos dados históricos relativos à situação epidemiológica da dengue no Estado de Rosas. Entre 2007 e 2012, o município registrou _N_ casos confirmados de dengue e _M_ óbitos. A distribuição dos casos confirmados por semana epidemiológica é apresentada na *Figura 1*. O número de casos por classificação final são apresentados na *Tabela 1*.
+
+![](Imagens/dengue.png){width="100%"}
+
+^1^ Este relatório foi produzido utilizando a linguagem `RMarkdown`.
+
+^2^ As informações sobre esta doença foram baseadas em conteúdo disponibilizado pelo Ministério da Saúde. Para obter mais informações, acesse [este link](https://www.gov.br/saude/pt-br/assuntos/saude-de-a-a-z/d/dengue).
+
+## Introdução
+
+1. O que é Dengue
+
+A dengue é a arbovirose urbana mais prevalente nas Américas, principalmente no Brasil. É uma doença febril que tem se mostrado de grande importância em saúde pública nos últimos anos. O vírus dengue (DENV) é um arbovírus transmitido pela picada da fêmea do mosquito _Aedes aegypti_ e possui quatro sorotipos diferentes (DENV-1, DENV-2, DENV-3 e DENV-4).
+
+i. Principais Sintomas
+
+* Febre alta > 38°C.
+* Dor no corpo e articulações
+* Dor atrás dos olhos.
+* Mal estar.
+* Falta de apetite.
+* Dor de cabeça.
+* Manchas vermelhas no corpo.
+
+ii. Transmissão
+
+O vírus da dengue (DENV) pode ser transmitido ao homem principalmente por via vetorial, pela picada de fêmeas de _Aedes aegypti_ infectadas, no ciclo urbano humano–vetor–humano. Os relatos de transmissão por via vertical (de mãe para filho durante a gestação) e transfusional são raros.
+
+iii. Diagnóstico
+
+* Métodos diretos
+
+  + Pesquisa de vírus (isolamento viral por inoculação em células);
+
+  + Pesquisa de genoma do vírus da dengue por transcrição reversa seguida de reação em cadeia da polimerase (RT-PCR);
+
+* Métodos indiretos
+
+  + Pesquisa de anticorpos IgM por testes sorológicos (ensaio imunoenzimático – ELISA)
+
+  + Teste de neutralização por redução de placas (PRNT);
+
+  + Inibição da hemaglutinação (IH);
+
+  + Pesquisa de antígeno NS1 (ensaio imunoenzimático – ELISA);
+
+  + Patologia: estudo anatomopatológico seguido de pesquisa de antígenos virais por imuno-histoquímica (IHQ).
+  
+## Análises
+
+### 1. Distribuição de casos por semana epidemiológica
+
+```{r, echo = FALSE}
+
+grafico_1 <- dengue |>
+  
+  # Contando número de casos por ano e semana epidemiológica
+  count(ano_epi, sem_epi) |>
+  
+  # Plotando visualização de gráfico por ano e semana epidemiológica
+  ggplot(aes(x = sem_epi, y = n, color = factor(ano_epi) )) +
+  
+  # Adicionando linhas
+  geom_line() +
+  
+  # Adicionando pontos
+  geom_point() +
+  
+  # Aplicando novo tema para o gráfico
+  theme_minimal() +
+  
+  # Adicionando rótulo para o eixo x
+  xlab("\nSemana epidemiológica") +
+  
+  # Adicionando rótulo para o eixo y
+  ylab("") +
+  
+  # Definindo o título da legenda
+  scale_color_discrete("Ano") +
+  
+  # Definindo o intervalo de valores dos rótulos do eixo x
+  scale_x_continuous(breaks = c(1, seq(5, 50, 5)))
+
+grafico_1
+```
+
+### 2. Número de casos por classificação final
+
+```{r, echo = FALSE}
+
+# Criando nova tabela com informações sobre dengue
+tabela_dengue <- dengue |>
+  
+  # Criando nova coluna com os nomes da Classificação Final utilizando a função mutate()
+  mutate(
+    Classificacao = case_when(
+      CLASSI_FIN == 1 ~ "Cura",
+      CLASSI_FIN == 2 ~ "Óbito",
+      CLASSI_FIN >= 3 ~ "Outro",
+      is.na(CLASSI_FIN) ~ "Ignorado"
+    )
+  ) |>
+  
+  # Contando o número de casos por ano epidemiológico e classificação final com a função count()
+  count(ano_epi, Classificacao) |>
+  
+  # Pivoteando a tabela para o formato "largo"
+  pivot_wider(names_from = Classificacao,
+              values_from = n,
+              values_fill = 0) |>
+  
+  # Selecionando apenas as colunas de interesse
+  select(ano_epi, Cura, Óbito, Outro, `Ignorado`) |>
+  
+  # Renomeando a coluna de ano epidemiológico ("ano_epi") para "Ano"
+  rename(Ano = ano_epi)
+
+# Incluindo a tabela no documento final com a função kable()
+# Melhorando a apresentação da tabela com a função kable_styling()
+kable(tabela_dengue) |>
+  kable_styling()
+```
