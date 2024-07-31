@@ -1,0 +1,418 @@
+@charset "UTF-8";
+/* CSS Document */
+		div{
+			font-family: "Open Sans", "Arial";
+			margin-left: auto;
+			margin-right: auto;
+			display: inline-block;
+			text-align: center;
+		}
+		p{
+		line-height: 1.8;
+			
+		}
+		.header{
+			width: 1200px;
+			height: 320px;
+		}
+		.voltar{
+			width: 908px;
+			height: 75px;
+			background-color: #ddd;
+			vertical-align: top;
+		}
+		.banner_curso{
+			width: 292px;
+			height: 320px;
+			background-color: white;
+			vertical-align: top;
+		}
+		.banner_unidade{
+			width: 908px;
+			height: 320px;
+			background-color: white;
+			vertical-align: top;
+		}
+		.menu{
+			font-family: "Open Sans", "Arial";
+			background-color: #f3f3f3;
+			vertical-align: top;
+			width: 292px;
+			height: auto;
+		}
+		.div_accordion{
+			width: 312px;
+			height: auto;
+			vertical-align: top;
+			align-content: left;
+		}
+		.allcontent{
+			background-color: #f3f3f3;
+			width: 1200px;
+			vertical-align: top;
+			height: auto;		
+		}
+		.container{
+			width: 1200px;
+			vertical-align: top;
+			height: auto;		
+		}
+		.content{
+			background-color: white;
+			width: 908px;
+			vertical-align: top;
+			height: auto;
+			box-shadow: -3px 2px 3px #b2b2b2;
+			text-align: center;
+		}
+		.div_conteudo_fundo_branco{
+       		background-color: white;
+			width: 908;
+			vertical-align: top;
+			height: auto;	
+			text-align: justify;
+			padding:62px;
+			}
+		.div_conteudo_fundo_cinza{
+			background-color: #EAEAEA;
+			width: 908px;
+			vertical-align: top;
+			height: auto;
+			text-align:left; 
+			padding-left: 62px;  
+			padding-right: 62px; 
+			padding-top: 30px; 
+			padding-bottom: 15px;
+		}
+		.fundo_verde_unidade{
+			background-color: #3fb294;
+			width: 908px;
+			vertical-align: top;
+			height: auto;
+			text-align:left;
+			padding-left: 62px;  
+			padding-right: 62px; 
+			padding-top: 30px; 
+			padding-bottom: 15px;
+			}
+		.fundo_laranja_unidade{
+			background-color: #DD5D50;
+			width: 908px;
+			vertical-align: top;
+			height: auto;
+			text-align:left;
+			padding-left: 62px;  
+			padding-right: 62px; 
+			padding-top: 30px; 
+			padding-bottom: 15px;
+			}
+		.fundo_azul_unidade{
+			background-color: #61b2ce;
+			width: 908px;
+			vertical-align: top;
+			height: auto;
+			text-align:left;
+			padding-left: 62px;  
+			padding-right: 62px; 
+			padding-top: 30px; 
+			padding-bottom: 15px;
+			}
+		.marcador_verde{
+       		background: #3FB294;
+			width: 80px;
+			height: 10px;
+			vertical-align: top;
+			}
+		.marcador_laranja{
+       		background: #DD5D50;
+			width: 80px;
+			height: 10px;
+			vertical-align: top;
+			}
+		.marcador_azul{
+       		background: #61b2ce;
+			width: 80px;
+			height: 10px;
+			vertical-align: top;
+			}
+		.marcador_branco{
+       		background: white;
+			width: 80px;
+			height: 10px;
+			vertical-align: top;
+			}
+		.marcador_verde_centro{
+       		background: #3FB294;
+			width: 80px;
+			height: 10px;
+			vertical-align: top;
+			text-align: center;
+			}
+		.marcador_laranja_centro{
+       		background: #DD5D50;
+			width: 80px;
+			height: 10px;
+			vertical-align: top;
+			text-align: center;
+			}
+		.marcador_azul_centro{
+       		background: #61b2ce;
+			width: 80px;
+			height: 10px;
+			vertical-align: top;
+			text-align: center;
+			}
+		.paragrafo{
+			vertical-align: top;
+			width: 790px;
+			}
+		.destaque_cinza{
+			background: #EAEAEA;
+			width: 670px;
+			height: auto;
+			text-align:justify; 
+			padding-left: 40px;  
+			padding-right: 40px; 
+			padding-top: 40px; 
+			padding-bottom: 40px; 
+			font-family: Open Sans, arial; 
+			font-size: 18px;
+			vertical-align: middle;
+			-webkit-border-radius: 15px;
+    		border-radius: 15px;
+			}
+		.icone_alerta{
+			width: 120px;
+			height: auto;
+			margin-top:0px;
+			text-align:justify; 
+			padding-left: 10px; 
+			padding-top: 10px; 
+			vertical-align: middle;
+			}
+		.texto_alerta{
+			width: 455px;
+			height: auto;
+			position: absolute;
+			margin-top:0px;
+			vertical-align: middle;
+			text-align:justify;
+			}
+		.saiba_mais_verde{
+			background: white;
+			width: 670px;
+			height: 70px;
+			align: center;
+			border-color: #3fb294;
+			border-width: 1px;
+			border-style:solid;
+			}
+		.saiba_mais_laranja{
+			background: white;
+			width: 670px;
+			height: 70px;
+			align: center;
+			border-color: #DD5D50;
+			border-width: 1px;
+			border-style:solid;
+			}
+		.saiba_mais_azul{
+			background: white;
+			width: 670px;
+			height: 70px;
+			align: center;
+			border-color: #61b2ce;
+			border-width: 1px;
+			border-style:solid;
+			}
+		.icone_seta{
+			width: 70px;
+			height: 70px;
+			margin-top:12px;
+			margin-left: 20px;
+			}
+		.texto_clique_aqui{
+			width: 300px;
+			height: 25px;
+			position: absolute;
+			margin-top:24px;
+			text-align: left;
+			}
+		.lista{
+			background-color: white;
+			width: 646px;
+			height: 108px;
+			text-align: center;
+			}
+		.sublinhado_verde {
+  			 text-decoration: none;
+   			 border-bottom: 4px solid #3fb294;
+			}
+		.sublinhado_laranja {
+  			 text-decoration: none;
+   			 border-bottom: 4px solid #DD5D50;
+			}
+		.sublinhado_azul {
+  			 text-decoration: none;
+   			 border-bottom: 4px solid #61b2ce;
+}
+/*
+		.box_codigos {
+   			background: #ddd;
+    		width: 608px;
+			height:auto;
+   			margin: auto;
+    		padding: 20px;
+    		text-align: left;
+			align: center;
+    		-moz-border-radius: 7px;
+    		-webkit-border-radius: 7px;
+    		border-radius: 7px;
+			border-color:gray;
+}*/
+.accordion {
+  background-color: #eee;
+  color: #444;
+  cursor: pointer;
+  padding: 0px 40px 0px 0px;
+  width: 100%;
+  border: none;
+  text-align: left;
+  outline: none;
+  font-size: 15px;
+  transition: 0.4s;
+}
+.active, .accordion:hover {
+  background-color: #ccc; 
+}
+.panel {
+  padding: 0 18px;
+  display: none;
+  background-color: white;
+  overflow: hidden;
+  vertical-align: middle;
+}
+.accordion:after {
+ /* content:'▲'; INATIVO Unicode character for "plus" sign (▲) */
+  font-size: 14px;
+  color: #B3B3B3;
+  float:right;
+  margin-top: 28px;
+  transform: scale(1.8, 0.9); /* Igual a scaleX(2) scaleY(0.5) */
+  transform-origin: left;
+}
+.active:after {
+  content: "▼"; /* Unicode character for "minus" sign (▼) */
+  color: #B3B3B3;
+}
+.linha_1_menu {
+  float: left;
+  margin-left: 0px;
+  background: #3FB294;
+  width: 10px;
+  height: 80px;
+}
+.linha_2_menu {
+  float: left;
+  margin-left: 0px;
+  background: #dd5d50;
+  width: 10px;
+  height: 80px;
+}
+.linha_3_menu {
+  float: left;
+  margin-left: 0px;
+  background: #61b2ce;
+  width: 10px;
+  height: 80px;
+}
+.submenu {
+  content:'\1F891'; /* Unicode character for "plus" sign */
+  font-size: 18px;
+  color: #777;
+  float:left;
+  margin-left: 20px;
+  margin-top: 30px;
+}
+a:link {
+ color: #3FB294;
+ text-decoration: none;
+ font-weight: bold;
+}
+a:hover {
+ color: gray;
+ font-weight: bold;
+ text-decoration: underline;
+}
+a:visited {
+  color: #3FB294;
+  text-decoration: none;
+  font-weight: bold;
+}	
+.link_laranja:link {
+ color: #DD5D50;
+ text-decoration: none;
+ font-weight: bold;
+}
+.link_laranja:hover {
+ color: gray;
+ font-weight: bold;
+ text-decoration: underline;
+}
+.link_laranja:visited {
+ color: #DD5D50;
+ text-decoration: none;
+ font-weight: bold;
+}
+.link_azul:link {
+ color: #61b2ce;
+ text-decoration: none;
+ font-weight: bold;
+}
+.link_azul:hover {
+ color: gray;
+ font-weight: bold;
+ text-decoration: underline;
+}
+.link_azul:visited {
+ color: #61b2ce;
+ text-decoration: none;
+ font-weight: bold;
+}
+ul.pagination {
+    display: inline-block;
+    padding: 0;
+    margin: 0;	
+}	
+ul.pagination li {
+	display: inline;}
+		
+ul.pagination li a {
+    color: dimgray;
+    float: center;
+    padding: 8px 16px;
+    text-decoration: none;
+}
+ul.pagination li a.ativar {
+    background-color: gray;
+    color: white;
+}
+ul.pagination li a:hover:not(.ativar) {background-color: #ddd;}
+div.center {
+    text-align: center;
+}ul.pagination li a {
+    font-size: 22px;
+	font-family: Open Sans, Arial;
+}
+ul.pagination li a {
+    transition: background-color .3s;
+}
+		
+.rodape_paginacao{
+	background: white;
+	width: 780px;
+	height: 50px;
+	text-align: center;
+}	
+.class {
+}
