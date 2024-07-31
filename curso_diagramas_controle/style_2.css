@@ -1,0 +1,102 @@
+@charset "UTF-8";
+/* CSS Document single pages */
+		div{
+			font-family: "Open Sans", "Arial";
+			margin-left: auto;
+			margin-right: auto;	
+		}
+		.header_p2{
+			 width: 1200px;
+		}
+		.title{
+			width: 826px;
+			font-family: "Open Sans", "Arial";
+			font-style: normal; 
+			color: #4d4d4d;
+        }
+		.clique_botao_cinza{
+			width: 826px;
+			height:120px;
+			position: absolute;
+		 }
+		.botao_modulo{
+            background-color: #ddd; 
+			width: 826px;
+			height:90px;
+			color: #4d4d4d;
+        }
+		 .texto_e_botoes{
+			width: 826px; 
+        }
+		 .linha_1{
+            background: #3FB294;
+			  width: 826px;
+			  height:10px;
+		}
+		 .linha_2{
+            background: #DD5D50;
+			width: 826px;
+			height:10px; 
+		}
+		 .linha_3{
+            background: #61B2CE;
+			width: 826px;
+			height:10px; 
+		}		
+.sublinhado_verde {
+  			 text-decoration: none;
+   			 border-bottom: 4px solid #3fb294;
+			}
+.sublinhado_laranja {
+  			 text-decoration: none;
+   			 border-bottom: 4px solid #DD5D50;
+			}
+.sublinhado_azul {
+  			 text-decoration: none;
+   			 border-bottom: 4px solid #61b2ce;
+}
+a:link {
+ color: #3FB294;
+ text-decoration: none;
+ font-weight: bold;
+}
+a:hover {
+ color: gray;
+ font-weight: bold;
+ text-decoration: underline;
+}
+a:visited {
+  color: #3FB294;
+  text-decoration: none;
+  font-weight: bold;
+}	
+.link_laranja:link {
+ color: #DD5D50;
+ text-decoration: none;
+ font-weight: bold;
+}
+.link_laranja:hover {
+ color: gray;
+ font-weight: bold;
+ text-decoration: underline;
+}
+.link_laranja:visited {
+ color: #DD5D50;
+ text-decoration: none;
+ font-weight: bold;
+}
+.link_azul:link {
+ color: #61b2ce;
+ text-decoration: none;
+ font-weight: bold;
+}
+.link_azul:hover {
+ color: gray;
+ font-weight: bold;
+ text-decoration: underline;
+}
+.link_azul:visited {
+ color: #61b2ce;
+ text-decoration: none;
+ font-weight: bold;
+}
